@@ -1,6 +1,6 @@
 export default function MainContent() {
   return (
-    <main>
+    <main style={{ backgroundColor: "red" }}>
       <p>I love to visit New York, Paris, and Tokyo.</p>
     </main>
   );
