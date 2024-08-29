@@ -1,52 +1,65 @@
-import React from "react";
-import { Formik, Form, Field, ErrorMessage } from "formik";
-import * as Yup from "yup";
+import React, { useState } from "react";
 
 const RegistrationForm = () => {
-  const initialValues = {
-    username: "",
-    email: "",
-    password: "",
-  };
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [errors, setErrors] = useState({});
 
-  const validationSchema = Yup.object({
-    username: Yup.string().required("Username is required"),
-    email: Yup.string()
-      .email("Invalid email address")
-      .required("Email is required"),
-    password: Yup.string().required("Password is required"),
-  });
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const newErrors = {};
 
-  const handleSubmit = (values, { resetForm }) => {
-    alert("Form submitted");
-    resetForm();
+    if (!username) newErrors.username = "Username is required";
+    if (!email) newErrors.email = "Email is required";
+    if (!password) newErrors.password = "Password is required";
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+    } else {
+      alert("Form submitted");
+      setUsername("");
+      setEmail("");
+      setPassword("");
+      setErrors({});
+    }
   };
 
   return (
-    <Formik
-      initialValues={initialValues}
-      validationSchema={validationSchema}
-      onSubmit={handleSubmit}
-    >
-      <Form>
-        <div>
-          <label htmlFor="username">Username:</label>
-          <Field type="text" id="username" name="username" />
-          <ErrorMessage name="username" component="div" />
-        </div>
-        <div>
-          <label htmlFor="email">Email:</label>
-          <Field type="email" id="email" name="email" />
-          <ErrorMessage name="email" component="div" />
-        </div>
-        <div>
-          <label htmlFor="password">Password:</label>
-          <Field type="password" id="password" name="password" />
-          <ErrorMessage name="password" component="div" />
-        </div>
-        <button type="submit">Register</button>
-      </Form>
-    </Formik>
+    <form onSubmit={handleSubmit}>
+      <h2>Controlled Form</h2>
+      <div>
+        <label htmlFor="username">Username:</label>
+        <input
+          type="text"
+          id="username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
+        {errors.username && <div>{errors.username}</div>}
+      </div>
+      <div>
+        <label htmlFor="email">Email:</label>
+        <input
+          type="email"
+          id="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        {errors.email && <div>{errors.email}</div>}
+      </div>
+      <div>
+        <label htmlFor="password">Password:</label>
+        <input
+          type="password"
+          id="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        {errors.password && <div>{errors.password}</div>}
+      </div>
+      <button type="submit">Register</button>
+    </form>
   );
 };
 
