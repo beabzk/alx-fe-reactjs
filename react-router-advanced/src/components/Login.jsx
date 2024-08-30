@@ -1,12 +1,17 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const Login = () => {
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleLogin = () => {
     localStorage.setItem("isAuthenticated", "true");
-    navigate("/profile");
+
+    // If the user was redirected to login from another page, send them back to that page.
+    // Otherwise, send them to the home page.
+    const from = location.state?.from?.pathname || "/";
+    navigate(from, { replace: true });
   };
 
   return (

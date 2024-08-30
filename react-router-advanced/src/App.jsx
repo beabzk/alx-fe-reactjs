@@ -2,8 +2,9 @@ import React from "react";
 import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import Home from "./components/Home";
 import Profile from "./components/Profile";
-import Blog from "./components/Blog";
+import Blog from "./components/BlogPost";
 import Login from "./components/Login";
+import Logout from "./components/Logout";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 const App = () => {
@@ -26,6 +27,9 @@ const App = () => {
             </li>
             <li>
               <Link to="/login">Login</Link>
+            </li>
+            <li>
+              <Logout />
             </li>
           </ul>
         </nav>
