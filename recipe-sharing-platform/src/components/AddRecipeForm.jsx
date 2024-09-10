@@ -7,7 +7,7 @@ const AddRecipeForm = () => {
     title: "",
     summary: "",
     ingredients: "",
-    instructions: "",
+    steps: "",
   });
   const [errors, setErrors] = useState({});
   const [nextId, setNextId] = useState(0);
@@ -53,10 +53,9 @@ const AddRecipeForm = () => {
     if (formData.ingredients.split("\n").filter((i) => i.trim()).length < 2) {
       newErrors.ingredients = "Please enter at least two ingredients";
     }
-    if (!formData.instructions.trim())
-      newErrors.instructions = "Instructions are required";
-    if (formData.instructions.split("\n").filter((i) => i.trim()).length < 2) {
-      newErrors.instructions = "Please enter at least two instructions";
+    if (!formData.steps.trim()) newErrors.steps = "Steps are required";
+    if (formData.steps.split("\n").filter((i) => i.trim()).length < 2) {
+      newErrors.steps = "Please enter at least two steps";
     }
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -74,7 +73,7 @@ const AddRecipeForm = () => {
           "+"
         )}`,
         ingredients: formData.ingredients.split("\n").filter((i) => i.trim()),
-        instructions: formData.instructions.split("\n").filter((i) => i.trim()),
+        instructions: formData.steps.split("\n").filter((i) => i.trim()),
       };
 
       // Add new recipe to local storage
@@ -163,23 +162,23 @@ const AddRecipeForm = () => {
 
         <div>
           <label
-            htmlFor="instructions"
+            htmlFor="steps"
             className="block text-sm font-medium text-gray-700"
           >
-            Instructions (one step per line)
+            Steps (one step per line)
           </label>
           <textarea
-            id="instructions"
-            name="instructions"
+            id="steps"
+            name="steps"
             rows="5"
-            value={formData.instructions}
+            value={formData.steps}
             onChange={handleChange}
             className={`mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 ${
-              errors.instructions ? "border-red-500" : ""
+              errors.steps ? "border-red-500" : ""
             }`}
           ></textarea>
-          {errors.instructions && (
-            <p className="mt-1 text-sm text-red-500">{errors.instructions}</p>
+          {errors.steps && (
+            <p className="mt-1 text-sm text-red-500">{errors.steps}</p>
           )}
         </div>
 
