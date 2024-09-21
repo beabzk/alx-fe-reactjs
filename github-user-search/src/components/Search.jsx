@@ -16,6 +16,16 @@ const Search = () => {
     setSearchParams((prev) => ({ ...prev, [name]: value }));
   };
 
+  const fetchUserData = async (username) => {
+    try {
+      const userData = await fetchUserDetails(username);
+      return userData;
+    } catch (error) {
+      console.error(`Error fetching data for ${username}:`, error);
+      return null;
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
@@ -25,9 +35,9 @@ const Search = () => {
     try {
       const data = await searchUsers(searchParams);
       const detailedResults = await Promise.all(
-        data.items.slice(0, 10).map((user) => fetchUserDetails(user.login))
+        data.items.slice(0, 10).map((user) => fetchUserData(user.login))
       );
-      setSearchResults(detailedResults);
+      setSearchResults(detailedResults.filter(Boolean));
     } catch (err) {
       setError(err.message);
     } finally {
