@@ -1,6 +1,7 @@
 import React from "react";
 import "./App.css";
 import Search from "./components/Search";
+import { SpeedInsights } from "@vercel/speed-insights/react";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
         <Search />
       </main>
+      <SpeedInsights />
     </div>
   );
 }
