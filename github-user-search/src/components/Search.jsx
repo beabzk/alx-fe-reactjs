@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { searchUsers, fetchUserDetails } from "../services/githubService";
+import { searchUsers, fetchUserData } from "../services/githubService";
 
 const Search = () => {
   const [searchParams, setSearchParams] = useState({
@@ -15,16 +15,6 @@ const Search = () => {
     const name = e.target.name;
     const value = e.target.value;
     setSearchParams((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const fetchUserData = async (username) => {
-    try {
-      const userData = await fetchUserDetails(username);
-      return userData;
-    } catch (error) {
-      console.error(`Error fetching data for ${username}:`, error);
-      return null;
-    }
   };
 
   const handleSubmit = async (e) => {
