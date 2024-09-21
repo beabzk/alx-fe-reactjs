@@ -1,5 +1,6 @@
 import React from "react";
 import "./App.css";
+import Search from "./components/Search";
 
 function App() {
   return (
@@ -8,14 +9,7 @@ function App() {
         <h1>GitHub User Search</h1>
       </header>
       <main>
-        {/* Search input will go here */}
-        <div className="search-container">
-          {/* Add search input component here */}
-        </div>
-        {/* Results will go here */}
-        <div className="results-container">
-          {/* Add results component here */}
-        </div>
+        <Search />
       </main>
     </div>
   );
