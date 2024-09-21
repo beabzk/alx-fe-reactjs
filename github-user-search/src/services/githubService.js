@@ -9,7 +9,7 @@ export const searchUsers = async (params) => {
     if (minRepos) query += `+repos:>=${minRepos}`;
 
     try {
-        const response = await axios.get(`${API_BASE_URL}/search/users?q=${encodeURIComponent(query)}`, {
+        const response = await axios.get(`https://api.github.com/search/users?q=${encodeURIComponent(query)}`, {
             params: {
                 per_page: 10,
             },
