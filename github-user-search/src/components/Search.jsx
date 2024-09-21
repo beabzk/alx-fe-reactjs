@@ -128,9 +128,7 @@ const Search = () => {
         </div>
       )}
       {searchResults.length === 0 && !isLoading && !error && (
-        <p className="text-center">
-          No results found. Try adjusting your search criteria.
-        </p>
+        <p className="text-center">Looks like we cant find the user</p>
       )}
     </div>
   );
